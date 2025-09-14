@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TOURNAMENT — Free Fire Max</title>
+  <meta name="theme-color" content="#0b0f15">
+
+  <!-- Manifest & Favicon -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body { 
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+      color: #e2e8f0; 
+      background: #05060a;
+      line-height: 1.6;
+    }
+
+    :root {
+      --bg: #05060a;
+      --panel: #0b1117;
+      --accent: #9b5cff;
+      --accent2: #00e6ff;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    
+    .logo {
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(0, 230, 255, 0.12), 0 0 30px rgba(155, 92, 255, 0.06);
+    }
+    
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    nav { display: flex; gap: 12px; }
+    
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    nav a.button {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #071126;
+      box-shadow: 0 4px 15px rgba(0, 230, 255, 0.2);
+    }
+    
+    nav a.button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 230, 255, 0.3);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: center;
+      margin: 40px 0;
+    }
+    
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 8px 35px rgba(11, 17, 23, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(11, 17, 23, 0.7);
+    }
+    
+    .hero-left h1 {
+      font-size: 42px;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.2;
+      background: linear-gradient(90deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-left p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    
+    .btn {
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #071126;
+      box-shadow: 0 4px 15px rgba(0, 230, 255, 0.25);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 230, 255, 0.35);
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+    }
+    
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    
+    .feature {
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: transform 0.3s ease;
+    }
+    
+    .feature:hover {
+      transform: translateY(-3px);
+    }
+    
+    .feature h4 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .panel-side {
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .panel-side::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    
+    .panel-side h3 {
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+    
+    .panel-side p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .neon-line {
+      height: 3px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      margin: 20px 0;
+      opacity: 0.7;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 968px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .features { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      .hero-left h1 { font-size: 32px; }
+      .features { grid-template-columns: 1fr; }
+      .cta-row { flex-direction: column; }
+      nav {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: var(--panel);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+      }
+      nav.active { display: flex; }
+      .mobile-menu-btn { display: block; }
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-in { animation: fadeIn 0.6s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">TOURNAMENT</div>
+        <div class="subtitle">Free Fire Max — Competitions & Bookings</div>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+      <nav id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="playersname.html">Players Name</a>
+        <a href="booking.html" class="button">Book Seat</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="card hero-left animate-in">
+        <h1>Join the Ultimate Free Fire Max Tournament</h1>
+        <p>Compete with top players, earn amazing rewards and showcase your skills. Sign up quickly, book your seat and check the players list before the match. Secure spots are limited — first come, first served.</p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="booking.html"><span>Book Seat</span></a>
+          <a class="btn btn-ghost" href="playersname.html"><span>See Players</span></a>
+        </div>
+
+        <div class="features">
+          <div class="feature animate-in delay-1">
+            <h4><span>🏆</span> Pro Organization</h4>
+            <p>Clear rules, live updates and verified winners with professional tournament management.</p>
+          </div>
+          <div class="feature animate-in delay-2">
+            <h4><span>🔒</span> Secure Booking</h4>
+            <p>Instant confirmation with booking ID — multiple payment methods supported with encryption.</p>
+          </div>
+          <div class="feature animate-in delay-3">
+            <h4><span>⚡</span> Instant Matchmaking</h4>
+            <p>Advanced algorithm for auto team pairing and brackets for a smooth competitive event.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card panel-side animate-in delay-2">
+        <h3>Next Match</h3>
+        <p>
+          <strong>Clash Squad - 2v2</strong><br>
+          Coming Soon<br>
+          Prize: <span style="color:var(--accent)">₹1800</span>
+        </p>
+
+        <div class="neon-line"></div>
+        <p style="font-size:14px;color:var(--muted)">Developer & Host: Ayush<br>Co-Host: Samim</p>
+      </aside>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> TOURNAMENT. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="mailto:ayush@example.com">Contact Us</a>
+        <a href="#">Support</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Set current year
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      document.getElementById('mainNav').classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const nav = document.getElementById('mainNav');
+      const menuBtn = document.getElementById('mobileMenuBtn');
+      if (!nav.contains(event.target) && event.target !== menuBtn && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+      }
+    });
+        if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>
