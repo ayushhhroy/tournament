@@ -168,6 +168,17 @@
       background: rgba(255, 255, 255, 0.05);
       color: var(--text);
     }
+    
+    /* NEW: Registration button styles */
+    .btn-register {
+      background: #9b5cff;
+      color: rgb(0, 0, 0);
+      border: none;
+    }
+    
+    .btn-register:hover {
+      background: #8a4eff;
+    }
 
     .features {
       display: grid;
@@ -239,6 +250,30 @@
       margin: 20px 0;
       opacity: 0.7;
     }
+    
+    /* NEW: Registration section styles */
+    .registration-section {
+      text-align: center;
+      margin: 60px 0 40px;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    
+    .registration-section h2 {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+    
+    .registration-section p {
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     footer {
       margin-top: 40px;
@@ -308,6 +343,7 @@
         text-align: center;
       }
       .footer-links { flex-wrap: wrap; justify-content: center; }
+      .registration-section h2 { font-size: 26px; }
     }
 
     @keyframes fadeIn {
@@ -373,6 +409,13 @@
         <div class="neon-line"></div>
         <p style="font-size:14px;color:var(--muted)">Developer & Host: Ayush<br>Co-Host: Samim</p>
       </aside>
+    </div>
+    
+    <!-- NEW: Registration section -->
+    <div class="registration-section animate-in">
+      <h2>Ready to Join the Battle?</h2>
+      <p>Don't miss your chance to compete against the best Free Fire Max players. Register now to secure your spot in the upcoming tournament!</p>
+      <a href="booking.html" class="btn btn-register">Register for Tournament</a>
     </div>
 
     <footer>
