@@ -113,6 +113,50 @@
       box-shadow: none !important;
     }
 
+    .game-mode-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      gap: 15px;
+      position: relative;
+    }
+
+    .mode-tab {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(25, 30, 50, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mode-tab.active {
+      background: linear-gradient(90deg, #9b5cff, #00e6ff);
+      color: #071126;
+      box-shadow: 0 4px 15px rgba(155, 92, 255, 0.3);
+    }
+
+    .mode-tab:not(.active):hover {
+      background: rgba(155, 92, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .mode-tab .badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #00e6ff;
+      color: #071126;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 10px;
+      animation: pulse 2s infinite;
+    }
+
     .page-title {
       text-align: center;
       margin-bottom: 25px;
@@ -256,6 +300,11 @@
 
     .commission {
       color: #f59e0b;
+    }
+
+    .kill-bonus {
+      color: #f43f5e;
+      font-weight: 700;
     }
 
     .note {
@@ -428,6 +477,17 @@
       }
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes tabSwitch {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     /* Mobile adjustments */
     @media (max-width: 768px) {
       .page-title h1 {
@@ -442,6 +502,16 @@
       .terms-agreement {
         flex-direction: column;
         gap: 10px;
+      }
+
+      .game-mode-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .mode-tab {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -459,71 +529,153 @@
 
     <div class="page-title">
       <h1>Tournament Prize List</h1>
-      <p>Single match winner takes all! Check the winning amounts based on entry fees after 20% commission.</p>
+      <p>Check the winning amounts and prize structure for different game modes</p>
     </div>
 
-    <div class="info-card">
-      <h2>How It Works</h2>
-      <p>• Single match - Winner (player or team) takes the entire prize</p>
-      <p>• 20% commission is deducted for tournament organization</p>
-      <p>• Winner receives 80% of the total entry fees collected</p>
-      <p>• Example: With ₹20 entry fee, winner receives ₹36 (after 20% commission)</p>
+    <!-- Game Mode Tabs -->
+    <div class="game-mode-tabs">
+      <div class="mode-tab active" data-mode="battle-royal">
+        Battle Royal
+      </div>
+      <div class="mode-tab" data-mode="clash-squad">
+        Clash Squad
+      </div>
     </div>
 
-    <table class="prize-table">
-      <thead>
-        <tr>
-          <th>Entry Fee</th>
-          <th>Winning Amount</th>
-          <th>Commission (20%)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="entry-fee">₹20</td>
-          <td class="prize-money">₹36</td>
-          <td class="commission">₹4</td>
-        </tr>
-        <tr>
-          <td class="entry-fee">₹50</td>
-          <td class="prize-money">₹90</td>
-          <td class="commission">₹10</td>
-        </tr>
-        <tr>
-          <td class="entry-fee">₹100</td>
-          <td class="prize-money">₹180</td>
-          <td class="commission">₹20</td>
-        </tr>
-        <tr>
-          <td class="entry-fee">₹200</td>
-          <td class="prize-money">₹360</td>
-          <td class="commission">₹40</td>
-        </tr>
-        <tr>
-          <td class="entry-fee">₹500</td>
-          <td class="prize-money">₹900</td>
-          <td class="commission">₹100</td>
-        </tr>
-        <tr>
-          <td class="entry-fee">₹1000</td>
-          <td class="prize-money">₹1800</td>
-          <td class="commission">₹200</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note">
-      <p>Note: The winning amount is calculated based on a single match with one winner taking the entire prize after 20% commission.</p>
-    </div>
-
-    <div class="terms-container">
-      <div class="terms-agreement">
-        <input type="checkbox" id="termsCheckbox">
-        <label for="termsCheckbox">I have read and understood all the terms and conditions and prize details above</label>
+    <!-- Battle Royal Content (Default) -->
+    <div id="battle-royal-content" class="game-content">
+      <div class="info-card">
+        <h2>How Battle Royal Works</h2>
+        <p>• Entry fee: ₹10 per player</p>
+        <p>• Each kill earns ₹10 (after 20% commission)</p>
+        <p>• 20% commission is deducted for tournament organization</p>
+        <p>• Example: With 5 kills, you earn ₹40 (₹50 - 20% commission)</p>
       </div>
 
-      <div class="cta-container">
-        <button class="btn btn-primary" id="bookSeatBtn" disabled>Book Your Seat Now</button>
+      <table class="prize-table">
+        <thead>
+          <tr>
+            <th>Kills</th>
+            <th>Prize Money</th>
+            <th>Commission (20%)</th>
+            <th>Total Earnings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="kill-bonus">1 kill</td>
+            <td class="prize-money">₹10</td>
+            <td class="commission">₹2</td>
+            <td class="entry-fee">₹8</td>
+          </tr>
+          <tr>
+            <td class="kill-bonus">3 kills</td>
+            <td class="prize-money">₹30</td>
+            <td class="commission">₹6</td>
+            <td class="entry-fee">₹24</td>
+          </tr>
+          <tr>
+            <td class="kill-bonus">5 kills</td>
+            <td class="prize-money">₹50</td>
+            <td class="commission">₹10</td>
+            <td class="entry-fee">₹40</td>
+          </tr>
+          <tr>
+            <td class="kill-bonus">7 kills</td>
+            <td class="prize-money">₹70</td>
+            <td class="commission">₹14</td>
+            <td class="entry-fee">₹56</td>
+          </tr>
+          <tr>
+            <td class="kill-bonus">10 kills</td>
+            <td class="prize-money">₹100</td>
+            <td class="commission">₹20</td>
+            <td class="entry-fee">₹80</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <p>Note: The winning amount is calculated based on your kills with ₹10 per kill after 20% commission deduction.</p>
+      </div>
+
+      <div class="terms-container">
+        <div class="terms-agreement">
+          <input type="checkbox" id="termsCheckboxBR">
+          <label for="termsCheckboxBR">I have read and understood all the terms and conditions and prize details above</label>
+        </div>
+
+        <div class="cta-container">
+          <button class="btn btn-primary" id="bookSeatBtnBR" disabled>Book Your Battle Royal Seat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clash Squad Content (Hidden by default) -->
+    <div id="clash-squad-content" class="game-content" style="display: none;">
+      <div class="info-card">
+        <h2>How Clash Squad Works</h2>
+        <p>• Single match - Winner (player or team) takes the entire prize</p>
+        <p>• 20% commission is deducted for tournament organization</p>
+        <p>• Winner receives 80% of the total entry fees collected</p>
+        <p>• Example: With ₹20 entry fee, winner receives ₹36 (after 20% commission)</p>
+      </div>
+
+      <table class="prize-table">
+        <thead>
+          <tr>
+            <th>Entry Fee</th>
+            <th>Winning Amount</th>
+            <th>Commission (20%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="entry-fee">₹20</td>
+            <td class="prize-money">₹36</td>
+            <td class="commission">₹4</td>
+          </tr>
+          <tr>
+            <td class="entry-fee">₹50</td>
+            <td class="prize-money">₹90</td>
+            <td class="commission">₹10</td>
+          </tr>
+          <tr>
+            <td class="entry-fee">₹100</td>
+            <td class="prize-money">₹180</td>
+            <td class="commission">₹20</td>
+          </tr>
+          <tr>
+            <td class="entry-fee">₹200</td>
+            <td class="prize-money">₹360</td>
+            <td class="commission">₹40</td>
+          </tr>
+          <tr>
+            <td class="entry-fee">₹500</td>
+            <td class="prize-money">₹900</td>
+            <td class="commission">₹100</td>
+          </tr>
+          <tr>
+            <td class="entry-fee">₹1000</td>
+            <td class="prize-money">₹1800</td>
+            <td class="commission">₹200</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <p>Note: The winning amount is calculated based on a single match with one winner taking the entire prize after 20% commission.</p>
+      </div>
+
+      <div class="terms-container">
+        <div class="terms-agreement">
+          <input type="checkbox" id="termsCheckboxCS">
+          <label for="termsCheckboxCS">I have read and understood all the terms and conditions and prize details above</label>
+        </div>
+
+        <div class="cta-container">
+          <button class="btn btn-primary" id="bookSeatBtnCS" disabled>Book Your Clash Squad Seat</button>
+        </div>
       </div>
     </div>
 
@@ -540,27 +692,72 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const termsCheckbox = document.getElementById('termsCheckbox');
-      const bookSeatBtn = document.getElementById('bookSeatBtn');
-
-      termsCheckbox.addEventListener('change', function() {
-        bookSeatBtn.disabled = !this.checked;
-        
-        // Add animation when enabled
-        if (!bookSeatBtn.disabled) {
-          bookSeatBtn.style.animation = 'pulse 1.5s infinite';
+      // Initialize both sets of terms and buttons
+      const termsCheckboxBR = document.getElementById('termsCheckboxBR');
+      const bookSeatBtnBR = document.getElementById('bookSeatBtnBR');
+      const termsCheckboxCS = document.getElementById('termsCheckboxCS');
+      const bookSeatBtnCS = document.getElementById('bookSeatBtnCS');
+      
+      // Battle Royal terms and button
+      termsCheckboxBR.addEventListener('change', function() {
+        bookSeatBtnBR.disabled = !this.checked;
+        if (!bookSeatBtnBR.disabled) {
+          bookSeatBtnBR.style.animation = 'pulse 1.5s infinite';
         } else {
-          bookSeatBtn.style.animation = 'none';
+          bookSeatBtnBR.style.animation = 'none';
         }
       });
 
-      bookSeatBtn.addEventListener('click', function() {
-        // Add click animation
+      bookSeatBtnBR.addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+          window.location.href = 'https://forms.gle/battleroyal';
+        }, 200);
+      });
+      
+      // Clash Squad terms and button
+      termsCheckboxCS.addEventListener('change', function() {
+        bookSeatBtnCS.disabled = !this.checked;
+        if (!bookSeatBtnCS.disabled) {
+          bookSeatBtnCS.style.animation = 'pulse 1.5s infinite';
+        } else {
+          bookSeatBtnCS.style.animation = 'none';
+        }
+      });
+
+      bookSeatBtnCS.addEventListener('click', function() {
         this.style.transform = 'scale(0.95)';
         setTimeout(() => {
           this.style.transform = '';
           window.location.href = 'https://forms.gle/mmgB1wD6YFjhMPHV9';
         }, 200);
+      });
+      
+      // Game mode tabs functionality
+      const modeTabs = document.querySelectorAll('.mode-tab');
+      const battleRoyalContent = document.getElementById('battle-royal-content');
+      const clashSquadContent = document.getElementById('clash-squad-content');
+      
+      modeTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          modeTabs.forEach(t => t.classList.remove('active'));
+          
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Show the corresponding content with animation
+          if (this.dataset.mode === 'battle-royal') {
+            clashSquadContent.style.display = 'none';
+            battleRoyalContent.style.display = 'block';
+            battleRoyalContent.style.animation = 'tabSwitch 0.5s ease forwards';
+          } else {
+            battleRoyalContent.style.display = 'none';
+            clashSquadContent.style.display = 'block';
+            clashSquadContent.style.animation = 'tabSwitch 0.5s ease forwards';
+          }
+        });
       });
       
       // Create particle background
@@ -593,7 +790,7 @@
       // Initialize particles
       createParticles();
       
-      // Add pulse animation for enabled button
+      // Add pulse animation for enabled buttons
       const style = document.createElement('style');
       style.textContent = `
         @keyframes pulse {
