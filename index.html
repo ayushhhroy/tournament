@@ -168,16 +168,9 @@
             cursor: pointer;
         }
 
-        .btn-battle:hover:not(:disabled) {
+        .btn-battle:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 92, 92, 0.35);
-        }
-
-        .btn-battle:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
         .btn-battle i {
@@ -467,17 +460,17 @@
                         <div class="time-label">Seconds</div>
                     </div>
                 </div>
-                <div class="timer-message">Battle available every Sunday at 12:00 AM</div>
-                <button class="btn-battle" id="battle-button" disabled>
+                <div class="timer-message">Battle available every Sunday</div>
+                <button class="btn-battle" id="battle-button">
                     <i class="fas fa-fighter-jet"></i> Battle Now
                 </button>
             </div>
 
             <div class="cta-row">
-                <a class="btn btn-primary" href="#">
+                <a class="btn btn-primary" href="Sponsors.html">
                     <i class="fas fa-chair"></i> Book Seat
                 </a>
-                <a class="btn btn-ghost" href="#">
+                <a class="btn btn-ghost" href="player.html">
                     <i class="fas fa-users"></i> See Players
                 </a>
             </div>
@@ -598,14 +591,6 @@
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            // Enable battle button only on Sunday (after Saturday midnight)
-            const battleButton = document.getElementById('battle-button');
-            if (dayOfWeek === 0 && now.getHours() >= 0) {
-                battleButton.disabled = false;
-            } else {
-                battleButton.disabled = true;
-            }
         }
         
         // Battle button click handler
@@ -614,8 +599,8 @@
             const dayOfWeek = now.getDay();
             
             if (dayOfWeek === 0) { // Sunday
-                alert("Battle starting now! Redirecting to game...");
-                // Here you would redirect to the actual battle page
+                // Redirect to button.html
+                window.location.href = "button.html";
             } else {
                 // Show toast notification
                 const toast = document.getElementById('toast-notification');
