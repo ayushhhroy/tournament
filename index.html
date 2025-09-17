@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOURNAMENT — Free Fire Max</title>
+    <title>Free Fire Tournament</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0b0f15 0%, #05060a 100%);
             color: #e2e8f0;
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -30,20 +31,19 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 40px;
+            padding: 15px 0;
+            margin-bottom: 25px;
         }
 
         .brand {
             display: flex;
-            gap: 14px;
+            gap: 10px;
             align-items: center;
         }
 
         .logo {
             font-weight: 800;
-            font-size: 32px;
+            font-size: 26px;
             letter-spacing: 2px;
             background: linear-gradient(90deg, #9b5cff, #00e6ff);
             -webkit-background-clip: text;
@@ -54,66 +54,155 @@
 
         .subtitle {
             color: #94a3b8;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
         }
 
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 32px;
-            margin: 40px 0;
+        .nav-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #9b5cff;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
         }
 
         .card {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 16px;
-            padding: 28px;
+            padding: 20px;
             box-shadow: 0 8px 35px rgba(11, 17, 23, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 25px;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(11, 17, 23, 0.7);
-        }
-
-        .hero-left h1 {
-            font-size: 42px;
-            margin-bottom: 16px;
-            line-height: 1.2;
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            line-height: 1.3;
             background: linear-gradient(90deg, #fff, #9b5cff);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center;
         }
 
-        .hero-left p {
+        .hero p {
             color: #94a3b8;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-size: 16px;
+            text-align: center;
+        }
+
+        /* Timer Styles */
+        .timer-container {
+            margin: 20px 0;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .timer-title {
+            font-size: 16px;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .time-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #9b5cff;
+            text-shadow: 0 0 10px rgba(155, 92, 255, 0.4);
+            line-height: 1;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        .time-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timer-message {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-top: 15px;
+        }
+
+        .btn-battle {
+            background: linear-gradient(90deg, #ff5c5c, #ff9b5c);
+            color: white;
+            width: 100%;
+            justify-content: center;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-battle:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 92, 92, 0.35);
+        }
+
+        .btn-battle:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-battle i {
+            margin-right: 8px;
         }
 
         .cta-row {
             display: flex;
-            gap: 16px;
-            margin-bottom: 28px;
+            gap: 12px;
+            margin: 20px 0;
         }
 
         .btn {
-            padding: 14px 24px;
+            padding: 14px 18px;
             border-radius: 10px;
             font-weight: 700;
             border: 0;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 15px;
+            font-size: 14px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
             text-decoration: none;
+            flex: 1;
         }
 
         .btn-primary {
@@ -138,116 +227,20 @@
             color: #e2e8f0;
         }
 
-        /* Timer Styles */
-        .timer-container {
-            margin: 25px 0;
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .timer-title {
-            font-size: 16px;
-            color: #94a3b8;
-            margin-bottom: 15px;
-        }
-
-        .timer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .time-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 80px;
-        }
-
-        .time-value {
-            font-size: 42px;
-            font-weight: 800;
-            color: #9b5cff;
-            text-shadow: 0 0 10px rgba(155, 92, 255, 0.4);
-            line-height: 1;
-            padding: 10px;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .time-label {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .timer-message {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-top: 15px;
-        }
-
-        .btn-battle {
-            background: linear-gradient(90deg, #ff5c5c, #ff9b5c);
-            color: white;
-            width: 100%;
-            justify-content: center;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            font-size: 18px;
-            padding: 16px;
-        }
-
-        .btn-battle:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 92, 92, 0.35);
-        }
-
-        .btn-battle:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Toast notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(11, 17, 23, 0.95);
-            color: #e2e8f0;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            opacity: 0;
-            transition: all 0.3s ease;
-            border-left: 4px solid #9b5cff;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+        .btn i {
+            margin-right: 8px;
         }
 
         /* Features section */
         .features {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 28px;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 20px;
         }
 
         .feature {
-            padding: 20px;
+            padding: 15px;
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -261,7 +254,7 @@
         .feature h4 {
             color: #fff;
             margin-bottom: 10px;
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -275,7 +268,7 @@
 
         /* Side panel */
         .panel-side {
-            padding: 24px;
+            padding: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -294,38 +287,42 @@
         .panel-side h3 {
             color: #9b5cff;
             margin-bottom: 12px;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .panel-side p {
             color: #94a3b8;
-            font-size: 15px;
+            font-size: 14px;
             margin-bottom: 16px;
         }
 
         .neon-line {
-            height: 3px;
+            height: 2px;
             border-radius: 8px;
             background: linear-gradient(90deg, #9b5cff, #00e6ff);
-            margin: 20px 0;
+            margin: 15px 0;
             opacity: 0.7;
         }
 
         /* Footer */
         footer {
-            margin-top: 60px;
-            padding: 24px 0;
+            margin-top: 40px;
+            padding: 20px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             color: #94a3b8;
             font-size: 14px;
+            gap: 15px;
         }
 
         .footer-links {
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
         }
 
         .footer-links a {
@@ -338,49 +335,98 @@
             color: #9b5cff;
         }
 
-        /* Responsive design */
-        @media (max-width: 968px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .features {
-                grid-template-columns: 1fr 1fr;
-            }
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(11, 17, 23, 0.95);
+            color: #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-left: 4px solid #9b5cff;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
-            .hero-left h1 {
-                font-size: 32px;
-            }
-            .features {
-                grid-template-columns: 1fr;
-            }
-            .cta-row {
-                flex-direction: column;
-            }
-            .timer {
-                gap: 8px;
-            }
-            .time-unit {
-                min-width: 60px;
-            }
-            .time-value {
-                font-size: 32px;
-                padding: 8px;
-            }
-            footer {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Navigation menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100%;
+            background: #0b1117;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: #e2e8f0;
+            text-decoration: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu a.button {
+            background: linear-gradient(90deg, #9b5cff, #00e6ff);
+            color: #071126;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
@@ -391,97 +437,110 @@
                 <div class="logo">TOURNAMENT</div>
                 <div class="subtitle">FF MAX</div>
             </div>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </header>
 
-        <div class="hero">
-            <div class="card hero-left">
-                <h1>Join the Ultimate Free Fire Max Tournament</h1>
-                <p>Compete with top players, earn amazing rewards and showcase your skills. Sign up quickly, book your seat and check the players list before the match. Secure spots are limited — first come, first served.</p>
+        <div class="card hero">
+            <h1>Join the Ultimate Free Fire Max Tournament</h1>
+            <p>Compete with top players, earn amazing rewards and showcase your skills. Sign up quickly, book your seat and check the players list.</p>
 
-                <!-- Timer Section -->
-                <div class="timer-container">
-                    <div class="timer-title">Next Battle Starts In:</div>
-                    <div class="timer">
-                        <div class="time-unit">
-                            <div class="time-value" id="days">06</div>
-                            <div class="time-label">Days</div>
-                        </div>
-                        <div class="time-unit">
-                            <div class="time-value" id="hours">23</div>
-                            <div class="time-label">Hours</div>
-                        </div>
-                        <div class="time-unit">
-                            <div class="time-value" id="minutes">44</div>
-                            <div class="time-label">Minutes</div>
-                        </div>
-                        <div class="time-unit">
-                            <div class="time-value" id="seconds">57</div>
-                            <div class="time-label">Seconds</div>
-                        </div>
+            <!-- Timer Section -->
+            <div class="timer-container">
+                <div class="timer-title">Next Battle Starts In:</div>
+                <div class="timer">
+                    <div class="time-unit">
+                        <div class="time-value" id="days">06</div>
+                        <div class="time-label">Days</div>
                     </div>
-                    <div class="timer-message">Battle available every Sunday</div>
-                    <button class="btn btn-battle" id="battle-button" disabled>
-                        <i class="fas fa-fighter-jet"></i> Battle Now
-                    </button>
-                </div>
-
-                <div class="cta-row">
-                    <a class="btn btn-primary" href="Sponsors.html">
-                        <i class="fas fa-chair"></i> Book Seat
-                    </a>
-                    <a class="btn btn-ghost" href="player.html">
-                        <i class="fas fa-users"></i> See Players
-                    </a>
-                </div>
-
-                <div class="features">
-                    <div class="feature">
-                        <h4><i class="fas fa-trophy"></i> Pro Organization</h4>
-                        <p>Clear rules, live updates and verified winners with professional tournament management.</p>
+                    <div class="time-unit">
+                        <div class="time-value" id="hours">23</div>
+                        <div class="time-label">Hours</div>
                     </div>
-                    <div class="feature">
-                        <h4><i class="fas fa-lock"></i> Secure Booking</h4>
-                        <p>Instant confirmation with booking ID — multiple payment methods supported with encryption.</p>
+                    <div class="time-unit">
+                        <div class="time-value" id="minutes">44</div>
+                        <div class="time-label">Minutes</div>
                     </div>
-                    <div class="feature">
-                        <h4><i class="fas fa-bolt"></i> Instant Matchmaking</h4>
-                        <p>Quick team pairing, instant matches, and fair brackets — ensuring full loyalty and smooth gameplay.</p>
+                    <div class="time-unit">
+                        <div class="time-value" id="seconds">57</div>
+                        <div class="time-label">Seconds</div>
                     </div>
                 </div>
+                <div class="timer-message">Battle available every Sunday at 12:00 AM</div>
+                <button class="btn-battle" id="battle-button" disabled>
+                    <i class="fas fa-fighter-jet"></i> Battle Now
+                </button>
             </div>
 
-            <aside class="card panel-side">
-                <h3>Next Match</h3>
-                <p>
-                    <strong>Clash Squad - 2v2</strong><br>
-                    Coming Soon<br>
-                    Prize: <span style="color:#9b5cff">₹1800</span>
-                </p>
-                <div class="neon-line"></div>
-                <h3>Current Match</h3>
-                <p>
-                    <strong>Battle Royal</strong><br>
-                    Sunday, 22nd September 2025<br>
-                    Per kill: <span style="color:#9b5cff">₹20</span>
-                </p>
-                <div class="neon-line"></div>
-                <p style="font-size:14px;color:#94a3b8">
-                    <i class="fas fa-code"></i> Developer & Host: Ayush<br>
-                    <i class="fas fa-gamepad"></i> Co-Host: Samim
-                </p>
-            </aside>
+            <div class="cta-row">
+                <a class="btn btn-primary" href="#">
+                    <i class="fas fa-chair"></i> Book Seat
+                </a>
+                <a class="btn btn-ghost" href="#">
+                    <i class="fas fa-users"></i> See Players
+                </a>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <h4><i class="fas fa-trophy"></i> Pro Organization</h4>
+                    <p>Clear rules, live updates and verified winners with professional tournament management.</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-lock"></i> Secure Booking</h4>
+                    <p>Instant confirmation with booking ID — multiple payment methods supported with encryption.</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-bolt"></i> Instant Matchmaking</h4>
+                    <p>Quick team pairing, instant matches, and fair brackets — ensuring full loyalty and smooth gameplay.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card panel-side">
+            <h3>Next Match</h3>
+            <p>
+                <strong>Clash Squad - 2v2</strong><br>
+                Coming Soon<br>
+                Prize: <span style="color:#9b5cff">₹1800</span>
+            </p>
+            <div class="neon-line"></div>
+            <h3>Current Match</h3>
+            <p>
+                <strong>Battle Royal</strong><br>
+                18th September 2025<br>
+                Per kill: <span style="color:#9b5cff">₹20</span>
+            </p>
+            <div class="neon-line"></div>
+            <p style="font-size:14px;color:#94a3b8">
+                <i class="fas fa-code"></i> Developer & Host: Ayush<br>
+                <i class="fas fa-gamepad"></i> Co-Host: Samim
+            </p>
         </div>
 
         <footer>
             <div>© 2023 TOURNAMENT. All rights reserved.</div>
             <div class="footer-links">
-                <a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a>
-                <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
-                <a href="#"><i class="fas fa-envelope"></i> Contact Us</a>
+                <a href="#"><i class="fas fa-file-contract"></i> Terms</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
                 <a href="#"><i class="fas fa-headset"></i> Support</a>
             </div>
         </footer>
     </div>
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu" id="navMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html">Home</a>
+        <a href="player.html">Players Name</a>
+        <a href="Sponsors.html" class="button">Book Seat</a>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast-notification">
@@ -489,6 +548,27 @@
     </div>
 
     <script>
+        // Mobile menu functionality
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const overlay = document.getElementById('overlay');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
         // Timer functionality
         function updateCountdown() {
             const now = new Date();
